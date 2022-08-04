@@ -8,7 +8,7 @@ function App() {
   const [listofFriends, setListofFriends] = useState([]);
 
   const addFriend = () => {
-    axios.post('http://localhost:3001/addfriend', { "name": name, "age": age }).then((result) => {
+    axios.post('https://merntutorial-app.herokuapp.com/addfriend', { "name": name, "age": age }).then((result) => {
       setListofFriends([...listofFriends, { _id: result.data._id, name: name, age: age }]);
       console.log(result.data);
     }).catch((error) => {
@@ -19,7 +19,7 @@ function App() {
   const updateFriend =(id) => {
     const newAge = prompt("enter new age");
 
-    axios.put('http://localhost:3001/update',{newAge: newAge, id: id}).then(() => {
+    axios.put('https://merntutorial-app.herokuapp.com/update',{newAge: newAge, id: id}).then(() => {
       setListofFriends(listofFriends.map((val) => {
         return val._id === id ? {_id: id, name: name, age: newAge} : val;
       }));
@@ -28,7 +28,7 @@ function App() {
 
   const deleteFriend = (id) => {
 
-    axios.delete(`http://localhost:3001/delete/${id}`).then(() => {
+    axios.delete(`https://merntutorial-app.herokuapp.com/delete/${id}`).then(() => {
       setListofFriends(listofFriends.filter((val) => {
         return val._id !== id;
       }));
@@ -36,7 +36,7 @@ function App() {
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3001/read').then((response) => {
+    axios.get('https://merntutorial-app.herokuapp.com/read').then((response) => {
       console.log(response.data);
       setListofFriends(response.data);
     }).catch((error) => {
